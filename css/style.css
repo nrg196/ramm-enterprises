@@ -149,6 +149,10 @@ h1, h2, h3 { font-family: var(--slab); color: var(--navy); line-height: 1.2; mar
 .contact-card p { margin: 0; color: var(--white); }
 .contact-card a { color: var(--white); }
 
+.map-wrap { margin-top: 2.5rem; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-lg); border: 4px solid rgba(255,255,255,.15); aspect-ratio: 21 / 8; background: #1a3d7a; }
+.map-wrap iframe { width: 100%; height: 100%; display: block; }
+@media (max-width: 860px) { .map-wrap { aspect-ratio: 4 / 3; } }
+
 /* Footer */
 .site-footer { background: var(--navy-dark); color: #AFC0DD; padding: 1.5rem 0; font-size: .9rem; border-top: 4px solid var(--red); }
 .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; }
