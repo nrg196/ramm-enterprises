@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ramm Enterprises | Textile Mill Machinery, Roll Shop Equipment & Spares</title>
+  <meta name="description" content="Ramm Enterprises, Coimbatore: roll shop machinery, card room equipment, gauges, tools and spares for spinning mills.">
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#top" class="brand" aria-label="Ramm Enterprises home">
+        <img src="images/logo.png" alt="Ramm Enterprises">
+      </a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+      <nav class="site-nav">
+        <a href="#products">Products</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="nav-cta">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <p class="eyebrow">Coimbatore, Tamil Nadu</p>
+        <h1>Machinery, Tools &amp; Spares for Spinning Mills</h1>
+        <p class="lead">Roll shop machines, card room equipment, gauges and consumables that keep your top rollers, cots and cards running at their best.</p>
+        <div class="hero-actions">
+          <a href="#products" class="btn btn-primary">View Products</a>
+          <a href="#contact" class="btn btn-ghost">Request a Quote</a>
+        </div>
+      </div>
+      <div class="hero-stripe" aria-hidden="true"></div>
+    </section>
+
+    <!-- CATEGORY STRIP -->
+    <section class="cat-strip">
+      <div class="container" id="category-tiles"></div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section id="products" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Our Products</h2>
+          <p>Select a product to see technical specifications.</p>
+        </div>
+
+        <div class="toolbar">
+          <div class="filters" id="filters" role="tablist"></div>
+          <input type="search" id="search" placeholder="Search products or model codes" aria-label="Search products">
+        </div>
+
+        <div id="product-groups"></div>
+        <p id="no-results" class="no-results" hidden>No products match your search.</p>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section section-alt">
+      <div class="container about-grid">
+        <div>
+          <h2>About Ramm Enterprises</h2>
+          <!-- PLACEHOLDER: replace with the approved company description -->
+          <p>Ramm Enterprises, based in Peelamedu, Coimbatore, works on special purpose machine development and automation for the textile industry.</p>
+          <p>Our range covers roll shop machinery, card room equipment, drafting and ring frame accessories, gauges, tools and mill consumables.</p>
+        </div>
+        <ul class="values">
+          <li><span>Quality</span></li>
+          <li><span>Innovation</span></li>
+          <li><span>Reliability</span></li>
+          <li><span>Sustainability</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section contact">
+      <div class="container contact-grid">
+        <div>
+          <h2>Contact Us</h2>
+          <p>Send us your requirement and we will get back with details and pricing.</p>
+        </div>
+        <div class="contact-cards">
+          <div class="contact-card">
+            <h3>Address</h3>
+            <p>1, Annanagar Main Road,<br>Peelamedu, Coimbatore 641004,<br>Tamil Nadu, India</p>
+          </div>
+          <div class="contact-card">
+            <h3>Phone</h3>
+            <p><a href="tel:+919500902163">+91 95009 02163</a></p>
+          </div>
+          <div class="contact-card">
+            <h3>Email</h3>
+            <p><a href="mailto:jproramm@gmail.com">jproramm@gmail.com</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year"></span> Ramm Enterprises. All rights reserved.</p>
+      <p class="small">Specifications are subject to change without prior notice due to continuous product development.</p>
+    </div>
+  </footer>
+
+  <!-- PRODUCT DETAIL DIALOG -->
+  <dialog id="product-dialog" aria-labelledby="dlg-title">
+    <button class="dlg-close" aria-label="Close">&times;</button>
+    <div class="dlg-body">
+      <div class="dlg-media">
+        <div class="dlg-main"><img id="dlg-img" alt=""></div>
+        <div class="dlg-thumbs" id="dlg-thumbs"></div>
+      </div>
+      <div class="dlg-info">
+        <p class="dlg-cat" id="dlg-cat"></p>
+        <h3 id="dlg-title"></h3>
+        <p class="dlg-model" id="dlg-model"></p>
+        <p id="dlg-summary"></p>
+        <div id="dlg-verify" class="verify-note" hidden></div>
+        <ul id="dlg-features" class="features"></ul>
+        <div id="dlg-specs"></div>
+        <a id="dlg-enquire" class="btn btn-primary" href="#">Enquire about this product</a>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="js/products.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
