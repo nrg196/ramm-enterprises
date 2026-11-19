@@ -1,7 +1,7 @@
-/* Ramm Enterprises brand: Red #E10600, Navy #002D72, slab serif headings */
+/* Ramm Enterprises brand: Red #830000, Navy #002D72, slab serif headings */
 :root {
-  --red: #E10600;
-  --red-dark: #B80500;
+  --red: #830000;
+  --red-dark: #5E0000;
   --navy: #002D72;
   --navy-dark: #001E4D;
   --ink: #1B2333;
@@ -107,7 +107,7 @@ h1, h2, h3 { font-family: var(--slab); color: var(--navy); line-height: 1.2; mar
 
 .about-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .since-panel { grid-column: 1 / -1; background: linear-gradient(120deg, var(--navy-dark), var(--navy)); color: var(--white); border-radius: 12px; padding: 1.5rem 1.75rem; display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 1.25rem; align-items: end; position: relative; overflow: hidden; }
-.since-panel::after { content: ""; position: absolute; right: -55px; top: -55px; width: 120px; height: 120px; border: 14px solid rgba(225,6,0,.85); border-radius: 50%; opacity: .9; }
+.since-panel::after { content: ""; position: absolute; right: -55px; top: -55px; width: 120px; height: 120px; border: 14px solid rgba(131,0,0,.85); border-radius: 50%; opacity: .9; }
 .since-panel > span { position: relative; z-index: 1; }
 .since-label { grid-column: 1 / -1; text-transform: uppercase; letter-spacing: .14em; font-size: .78rem; font-weight: 600; color: #FFB3B0; }
 .since-year { font-family: var(--slab); font-weight: 800; font-size: 3.6rem; line-height: 1; }
@@ -143,7 +143,7 @@ h1, h2, h3 { font-family: var(--slab); color: var(--navy); line-height: 1.2; mar
 .btn-whatsapp:hover { background: #178A45; }
 .btn-whatsapp svg { width: 20px; height: 20px; }
 .form-flash { animation: flash 1.2s ease; }
-@keyframes flash { 0%, 100% { box-shadow: var(--shadow-lg); } 30% { box-shadow: 0 0 0 4px rgba(225,6,0,.45); } }
+@keyframes flash { 0%, 100% { box-shadow: var(--shadow-lg); } 30% { box-shadow: 0 0 0 4px rgba(131,0,0,.45); } }
 .contact-card { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.18); border-radius: var(--radius); padding: 1.25rem; }
 .contact-card h3 { color: var(--white); font-size: 1rem; margin-bottom: .4rem; }
 .contact-card p { margin: 0; color: var(--white); }
