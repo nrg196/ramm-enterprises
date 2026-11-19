@@ -6,9 +6,19 @@ Static product catalog site (HTML, CSS, JavaScript). No build step. Works on Git
 
 - `index.html`: page layout (header, hero, products, about, contact)
 - `css/style.css`: brand styling (Red #E10600, Navy #002D72, slab serif headings)
-- `js/products.js`: **all product data**. Edit this file to add, remove or correct products, specs and images.
+- `js/products.js`: all product data. **Generated from `Ramm-Products.xlsx`, do not edit by hand.**
+- `tools/excel_to_products.py`: converts the Excel file into `js/products.js`
 - `js/app.js`: filters, search and product detail pop-up
 - `images/`: logo and product photos
+
+## Editing products
+
+Product data lives in **Ramm-Products.xlsx** (kept in the Ramm Enterprises folder, not in this repo). Its "Read Me" sheet explains every column.
+
+1. Edit the Excel file. Put any new photos in `images/` and enter their address (e.g. `images/new-machine.jpg`) in the Image columns.
+2. Send the saved Excel file to Claude to regenerate `js/products.js`, or run it yourself:
+   `python tools/excel_to_products.py "path\to\Ramm-Products.xlsx" js/products.js`
+3. Commit and push in GitHub Desktop.
 
 ## Review mode
 

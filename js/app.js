@@ -2,6 +2,7 @@
   const REVIEW = new URLSearchParams(location.search).has("review");
   const catName = id => (CATEGORIES.find(c => c.id === id) || {}).name || id;
   const hasSpecs = p => Array.isArray(p.specs) ? p.specs.length > 0 : !!(p.specs && p.specs.rows && p.specs.rows.length);
+  const imgSrc = f => !f ? "images/logo.png" : (f.includes("/") ? f : "images/" + f);
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
   let activeCat = "all";
@@ -73,14 +74,14 @@
     el.className = "card";
     el.type = "button";
     el.innerHTML = `
-      <div class="card-img"><img src="images/${esc(p.images[0])}" alt="${esc(p.name)}" loading="lazy"></div>
+      <div class="card-img"><img src="${esc(imgSrc(p.images && p.images[0]))}" alt="${esc(p.name)}" loading="lazy"></div>
       <div class="card-body">
         ${p.model ? `<span class="card-model">${esc(p.model)}</span>` : ""}
         <span class="card-title">${esc(p.name)}</span>
-        <p class="card-summary">${esc(p.summary)}</p>
+        ${p.summary ? `<p class="card-summary">${esc(p.summary)}</p>` : ""}
         <div class="card-foot">
           <span class="card-make">${p.make ? esc(p.make) : ""}${REVIEW && p.verify ? ' <span class="verify-flag">&#9888; check</span>' : ""}</span>
-          ${hasSpecs(p) ? '<span class="badge-specs">Specs</span>' : '<span class="card-link">Details &rarr;</span>'}
+          <span class="card-link">Details &rarr;</span>
         </div>
       </div>`;
     el.addEventListener("click", () => openProduct(p));
@@ -112,23 +113,26 @@
     $("dlg-title").textContent = p.name;
     $("dlg-model").textContent = p.model || "";
     $("dlg-model").hidden = !p.model;
-    $("dlg-summary").textContent = p.summary;
+    $("dlg-summary").textContent = p.summary || "";
+    $("dlg-summary").hidden = !p.summary;
 
     const v = $("dlg-verify");
     v.hidden = !(REVIEW && p.verify);
     v.textContent = p.verify ? "To verify: " + p.verify : "";
 
     $("dlg-features").innerHTML = (p.features || []).map(f => `<li>${esc(f)}</li>`).join("");
+    $("dlg-features").hidden = !(p.features && p.features.length);
     $("dlg-specs").innerHTML = specsHtml(p);
 
     const img = $("dlg-img");
     const setImg = i => {
-      img.src = "images/" + p.images[i];
+      img.src = imgSrc(p.images[i]);
       img.alt = p.name;
       $("dlg-thumbs").querySelectorAll("button").forEach((b, k) => b.classList.toggle("active", k === i));
     };
+    if (!p.images || !p.images.length) p.images = [""];
     $("dlg-thumbs").innerHTML = p.images.length > 1
-      ? p.images.map((src, i) => `<button type="button" aria-label="Image ${i + 1}"><img src="images/${esc(src)}" alt=""></button>`).join("")
+      ? p.images.map((src, i) => `<button type="button" aria-label="Image ${i + 1}"><img src="${esc(imgSrc(src))}" alt=""></button>`).join("")
       : "";
     $("dlg-thumbs").querySelectorAll("button").forEach((b, i) => b.addEventListener("click", () => setImg(i)));
     setImg(0);
@@ -140,7 +144,7 @@
   }
 
   function specsHtml(p) {
-    if (!hasSpecs(p)) return '<div class="spec-empty">Detailed specifications available on request.</div>';
+    if (!hasSpecs(p)) return "";
     if (Array.isArray(p.specs)) {
       return `<table class="spec-table"><caption>Technical Specifications</caption><tbody>${
         p.specs.map(([k, v]) => `<tr><th scope="row">${esc(k)}</th><td>${esc(v)}</td></tr>`).join("")
