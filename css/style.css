@@ -43,8 +43,7 @@ h1, h2, h3 { font-family: var(--slab); color: var(--navy); line-height: 1.2; mar
 .nav-toggle { display: none; background: none; border: 0; font-size: 1.8rem; color: var(--navy); cursor: pointer; }
 
 /* Hero */
-.hero { position: relative; background: linear-gradient(120deg, var(--navy-dark) 0%, var(--navy) 60%, #0A3F92 100%); color: var(--white); overflow: hidden; }
-.hero::before { content: ""; position: absolute; inset: 0; background-image: repeating-linear-gradient(135deg, rgba(255,255,255,.04) 0 2px, transparent 2px 22px); }
+.hero { position: relative; background: linear-gradient(90deg, rgba(0,30,77,.96) 0%, rgba(0,30,77,.85) 45%, rgba(0,45,114,.35) 100%), url("../images/hero.jpg") center 40% / cover no-repeat, var(--navy); color: var(--white); overflow: hidden; }
 .hero-inner { position: relative; padding: 5.5rem 0 5rem; max-width: 760px; }
 .hero h1 { color: var(--white); font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 800; }
 .eyebrow { text-transform: uppercase; letter-spacing: .14em; font-size: .8rem; font-weight: 600; color: #FFB3B0; margin: 0 0 .8rem; }
@@ -101,6 +100,11 @@ h1, h2, h3 { font-family: var(--slab); color: var(--navy); line-height: 1.2; mar
 .values { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .values li { background: var(--white); border-top: 4px solid var(--red); border-radius: 6px; padding: 1.4rem 1rem; text-align: center; box-shadow: var(--shadow); }
 .values span { font-family: var(--slab); font-weight: 600; color: var(--navy); font-size: 1.1rem; }
+
+.facts { list-style: none; padding: 0; margin: 1.5rem 0 0; display: flex; flex-wrap: wrap; gap: 1rem; }
+.facts li { background: var(--white); border-left: 4px solid var(--navy); border-radius: 6px; padding: .7rem 1rem; box-shadow: var(--shadow); display: flex; flex-direction: column; min-width: 140px; }
+.facts strong { font-family: var(--slab); color: var(--navy); font-size: 1.15rem; }
+.facts span { color: var(--muted); font-size: .85rem; }
 
 /* Contact */
 .contact { background: var(--navy); color: var(--white); }

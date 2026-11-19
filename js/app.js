@@ -1,6 +1,5 @@
 (function () {
   const REVIEW = new URLSearchParams(location.search).has("review");
-  const EMAIL = "jproramm@gmail.com";
   const catName = id => (CATEGORIES.find(c => c.id === id) || {}).name || id;
   const hasSpecs = p => Array.isArray(p.specs) ? p.specs.length > 0 : !!(p.specs && p.specs.rows && p.specs.rows.length);
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -93,6 +92,13 @@
   const $ = id => document.getElementById(id);
   dlg.querySelector(".dlg-close").addEventListener("click", () => dlg.close());
   dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+  $("dlg-enquire").href = "#contact";
+  $("dlg-enquire").addEventListener("click", e => {
+    e.preventDefault();
+    dlg.close();
+    history.replaceState(null, "", location.pathname + location.search + "#contact");
+    document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
+  });
   dlg.addEventListener("close", () => { if (location.hash.startsWith("#p-")) history.replaceState(null, "", location.pathname + location.search); });
 
   function openProduct(p) {
@@ -121,8 +127,6 @@
     $("dlg-thumbs").querySelectorAll("button").forEach((b, i) => b.addEventListener("click", () => setImg(i)));
     setImg(0);
 
-    const subject = `Enquiry: ${p.name}${p.model ? " (" + p.model + ")" : ""}`;
-    $("dlg-enquire").href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}`;
 
     history.replaceState(null, "", "#p-" + p.id);
     if (!dlg.open) dlg.showModal();
