@@ -92,16 +92,22 @@
   const $ = id => document.getElementById(id);
   dlg.querySelector(".dlg-close").addEventListener("click", () => dlg.close());
   dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+  let currentProduct = null;
   $("dlg-enquire").href = "#contact";
   $("dlg-enquire").addEventListener("click", e => {
     e.preventDefault();
     dlg.close();
     history.replaceState(null, "", location.pathname + location.search + "#contact");
-    document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
+    if (currentProduct) $("enq-product").value = currentProduct.id;
+    const form = $("enquiry-form");
+    form.scrollIntoView({ behavior: "smooth", block: "center" });
+    form.classList.remove("form-flash"); void form.offsetWidth; form.classList.add("form-flash");
+    setTimeout(() => form.querySelector('[name="name"]').focus({ preventScroll: true }), 600);
   });
   dlg.addEventListener("close", () => { if (location.hash.startsWith("#p-")) history.replaceState(null, "", location.pathname + location.search); });
 
   function openProduct(p) {
+    currentProduct = p;
     $("dlg-cat").textContent = catName(p.category) + (p.make ? "  |  " + p.make : "");
     $("dlg-title").textContent = p.name;
     $("dlg-model").textContent = p.model || "";
@@ -145,6 +151,38 @@
       <thead><tr><th></th>${cols.map(c => `<th scope="col">${esc(c)}</th>`).join("")}</tr></thead>
       <tbody>${rows.map(([k, ...vals]) => `<tr><th scope="row">${esc(k)}</th>${vals.map(v => `<td>${esc(v)}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
   }
+
+  // Enquiry form (WhatsApp)
+  const WHATSAPP = "919500902163";
+  const productLabel = p => p.name + (p.model ? " (" + p.model + ")" : "");
+  const sel = $("enq-product");
+  sel.innerHTML = '<option value="">Select a product</option>' +
+    CATEGORIES.map(c => {
+      const items = PRODUCTS.filter(p => p.category === c.id);
+      return items.length ? `<optgroup label="${esc(c.name)}">${items.map(p => `<option value="${esc(p.id)}">${esc(productLabel(p))}</option>`).join("")}</optgroup>` : "";
+    }).join("") +
+    '<option value="other">Other / general enquiry</option>';
+
+  $("enquiry-form").addEventListener("submit", e => {
+    e.preventDefault();
+    const f = e.target;
+    const name = f.name.value.trim();
+    const pid = sel.value;
+    f.name.classList.toggle("invalid", !name);
+    sel.classList.toggle("invalid", !pid);
+    $("enq-error").hidden = !!(name && pid);
+    if (!name || !pid) return;
+    const prod = pid === "other" ? "Other / general enquiry" : productLabel(PRODUCTS.find(p => p.id === pid));
+    const lines = [
+      "Hello Ramm Enterprises, I would like to enquire about:",
+      "*Product:* " + prod,
+      "*Name:* " + name,
+      f.company.value.trim() && "*Company:* " + f.company.value.trim(),
+      f.phone.value.trim() && "*Phone:* " + f.phone.value.trim(),
+      f.message.value.trim() && "*Message:* " + f.message.value.trim()
+    ].filter(Boolean);
+    window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(lines.join("\n"))}`, "_blank", "noopener");
+  });
 
   // Mobile nav
   const toggle = document.querySelector(".nav-toggle");
