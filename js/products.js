@@ -734,7 +734,7 @@ const PRODUCTS = [
     "category": "toproll",
     "make": "Perfect / Holz",
     "images": [
-      "images/flyer-clean.jpg"
+      "images/flyer-clean.jpeg"
     ],
     "summary": "Specially designed to clean closed-type flyers.",
     "features": [],
