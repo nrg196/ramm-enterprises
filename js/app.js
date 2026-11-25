@@ -8,6 +8,68 @@
   let activeCat = "all";
   let query = "";
 
+  // ── Hero Carousel ──
+  (function initHeroCarousel() {
+    if (typeof HERO_PRODUCT_IDS === "undefined" || !HERO_PRODUCT_IDS.length) return;
+    const heroProducts = HERO_PRODUCT_IDS.map(id => PRODUCTS.find(p => p.id === id)).filter(Boolean);
+    if (!heroProducts.length) return;
+
+    const slidesEl = document.getElementById("hero-slides");
+    const dotsEl = document.getElementById("hero-dots");
+    if (!slidesEl || !dotsEl) return;
+
+    let current = 0;
+    let autoTimer = null;
+
+    heroProducts.forEach((p, i) => {
+      const slide = document.createElement("div");
+      slide.className = "hero-slide" + (i === 0 ? " active" : "");
+      slide.innerHTML = `
+        <div class="hero-slide-card" data-product-id="${esc(p.id)}">
+          <div class="hero-slide-img"><img src="${esc(imgSrc(p.images && p.images[0]))}" alt="${esc(p.name)}" loading="${i === 0 ? 'eager' : 'lazy'}" onerror="this.onerror=null;this.src='images/logo.png';"></div>
+          <div class="hero-slide-body">
+            ${p.model ? `<span class="hero-slide-model">${esc(p.model)}</span>` : ""}
+            <span class="hero-slide-name">${esc(p.name)}</span>
+            ${p.summary ? `<p class="hero-slide-summary">${esc(p.summary)}</p>` : ""}
+            <span class="hero-slide-link">View details &rarr;</span>
+          </div>
+        </div>`;
+      slide.querySelector(".hero-slide-card").addEventListener("click", () => openProduct(p));
+      slidesEl.appendChild(slide);
+
+      const dot = document.createElement("button");
+      dot.className = "hero-dot" + (i === 0 ? " active" : "");
+      dot.setAttribute("aria-label", `Show ${p.name}`);
+      dot.addEventListener("click", () => goTo(i));
+      dotsEl.appendChild(dot);
+    });
+
+    function goTo(idx) {
+      const slides = slidesEl.querySelectorAll(".hero-slide");
+      const dots = dotsEl.querySelectorAll(".hero-dot");
+      slides[current].classList.remove("active");
+      dots[current].classList.remove("active");
+      current = idx;
+      slides[current].classList.add("active");
+      dots[current].classList.add("active");
+      resetAuto();
+    }
+
+    function next() { goTo((current + 1) % heroProducts.length); }
+
+    function resetAuto() {
+      clearInterval(autoTimer);
+      autoTimer = setInterval(next, 4000);
+    }
+
+    resetAuto();
+
+    // Pause on hover
+    const carousel = document.getElementById("hero-carousel");
+    carousel.addEventListener("mouseenter", () => clearInterval(autoTimer));
+    carousel.addEventListener("mouseleave", resetAuto);
+  })();
+
   // Category tiles
   const tiles = document.getElementById("category-tiles");
   CATEGORIES.forEach(c => {
@@ -73,6 +135,7 @@
     const el = document.createElement("button");
     el.className = "card";
     el.type = "button";
+    el.dataset.pid = p.id;
     el.innerHTML = `
       <div class="card-img"><img src="${esc(imgSrc(p.images && p.images[0]))}" alt="${esc(p.name)}" loading="lazy"></div>
       <div class="card-body">

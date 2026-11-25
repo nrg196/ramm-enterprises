@@ -31,6 +31,14 @@ const CATEGORIES = [
   {
     "id": "hygiene",
     "name": "Hygiene Solutions"
+  },
+  {
+    "id": "automation",
+    "name": "Automation"
+  },
+  {
+    "id": "filtration",
+    "name": "Water & Air Filtration"
   }
 ];
 
@@ -1231,5 +1239,54 @@ const PRODUCTS = [
         "1 to 15 cm"
       ]
     ]
+  },
+  {
+    "id": "inv-servo",
+    "name": "AC Servo Drives & Motors",
+    "model": "SV630 / SV660 / SV670 / SV680 & MS1-R",
+    "category": "automation",
+    "make": "Inovance",
+    "images": [
+      "images/inv-servo.jpg"
+    ],
+    "summary": "Precision AC servo systems with high-bandwidth response, multi-turn encoders, and IE5-class motors.",
+    "features": [
+      "Automatic inertia identification and resonance suppression",
+      "Supports EtherCAT, PROFINET, CANopen, Modbus RTU, and pulse control",
+      "Built-in STO safety (SIL 3 / FSoE / PROFIsafe on SV680)"
+    ],
+    "specs": [
+      ["Power & Voltage", "0.05–7.5 kW; 200–240 V AC (1/3-Ph) & 380–480 V AC (3-Ph)"],
+      ["Speed Loop Bandwidth", "Up to 3.5 kHz (SV680)"],
+      ["Encoder Resolution", "23-bit or 26-bit multi-turn absolute"],
+      ["MS1-R Servo Motor", "Up to 7000 rpm, IP67, IE5-equivalent efficiency"]
+    ]
+  },
+  {
+    "id": "jyfo-dust-filter",
+    "name": "Honeycomb Dust Filter",
+    "model": "JYFO Series (JYFO-III-4 to JYFO-III-8)",
+    "category": "filtration",
+    "make": "Jiangsu Jingya Group",
+    "images": [
+      "images/jyfo-dust-filter.jpg"
+    ],
+    "summary": "Two-stage electromechanical dust-filtering unit for collecting fibrous waste and fine dust in textile mills.",
+    "features": [
+      "Integrated fiber compactor for Stage I fibrous waste collection",
+      "Motorized suction arm for automatic Stage II bag cleaning",
+      "Built-in safety alarms with purified air recirculation or clean exhaust",
+      "Suitable for cotton, wool, flax, chemical fiber, and tobacco mills"
+    ],
+    "specs": [
+      ["Filtration Stages", "Two-stage (Stage I: Disc filter; Stage II: Honeycomb bags)"],
+      ["Stage I Disc Diameter", "1600 mm to 2600 mm (JYFO-III-4 to JYFO-III-8)"],
+      ["Stage I Filter Area", "1.80 m² to 4.67 m² (60 mesh/inch stainless steel)"],
+      ["Stage II Filter Media", "6 fire-proof plush cylindrical bags per row"],
+      ["Control & Certification", "PLC automatic control cabinet; CE certified"]
+    ]
   }
 ];
+
+/* Products to highlight in the hero carousel (order matches the sheet) */
+const HERO_PRODUCT_IDS = ["fluff", "inv-servo", "jyfo-dust-filter"];
